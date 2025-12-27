@@ -1,0 +1,22 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Launch CMake Target (gdb)",
+      "type": "cppdbg",                      // Linux 用 cppdbg
+      "request": "launch",
+      "program": "${command:cmake.launchTargetPath}",
+      "cwd": "${command:cmake.launchTargetDirectory}",
+      "args": [], 
+      "stopAtEntry": false,
+
+      // gdb 调试
+      "MIMode": "gdb",
+      "miDebuggerPath": "/usr/bin/gdb",
+
+      // 可选：环境变量（先空着）
+      "environment": [],
+      "externalConsole": false
+    }
+  ]
+}
