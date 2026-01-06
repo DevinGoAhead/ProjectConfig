@@ -1,7 +1,5 @@
 CompileFlags:
   Add:
-  - -Wall
-  - -Wextra
   - -Wno-c++98-compat
   - -Wno-c++98-compat-pedantic
   - -Wno-padded
@@ -16,12 +14,8 @@ Diagnostics:
     Remove:
     - hicpp-*
     - modernize-use-trailing-return-type
-    - modernize-pass-by-value
     - readability-magic-numbers
-    - readability-braces-around-statements
     - readability-identifier-length
-    - readability-isolate-declaration
-    - readability-redundant-access-specifiers
     - readability-convert-member-functions-to-static
 
 InlayHints:

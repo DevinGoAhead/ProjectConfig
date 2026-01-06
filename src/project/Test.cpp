@@ -2,7 +2,7 @@
 #include <iostream>
 
 namespace{
-    void Print(){
+    [[maybe_unused]] void Print(){
         std::cout << "Hello Project\n";
     }
 }

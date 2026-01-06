@@ -14,17 +14,24 @@ target_include_directories(Project
 # 因为实现一般都是在 cpp 文件中的, 不会暴露给头文件
 target_link_libraries(Project 
     PRIVATE 
-        SPDLOG)
+        ProjectDeps)
 
 target_compile_definitions(Project
     # 编译时添加的宏
     # PRIVATE 表示不传递
     PRIVATE
         PROJECT_BUILD
-) 
+    PUBLIC
+        # generator expression, "生成构建系统/构建阶段”按条件展开
+        # 当配置是 Debug 时, $<CONFIG:Debug> 为 1, 条件为真, ANT_DEBUG 有效
+        # 其它类似
+        $<$<CONFIG:Debug>:ANT_DEBUG>
+        $<$<CONFIG:Release>:ANT_RELEASE>
+)
 
-# 如果是静态库可以像下面这样
+# 就 PROJECT_BUILD 而言, 如果是静态库可以添加其它宏, 如
 # target_compile_definitions(Project 
 #     PUBLIC 
 #         PROJECT_STATIC
 # )
+ant_apply_options(Project)
