@@ -1,6 +1,6 @@
 #pragma once
 
-#include "ProjectAPI.h"
+#include "../PlatformDetection.h"
 
 namespace PT {
     PROJECT_API void Print();
