@@ -23,7 +23,8 @@
                 "ANT_WERROR": "OFF",
                 "ANT_SANITIZE": "OFF",
                 "ANT_LTO": "OFF",
-                "ANT_DIST": "OFF"
+                "ANT_DIST": "OFF",
+                "ANT_LOGGING": "ON"
             }
         },
         {
@@ -33,8 +34,7 @@
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "Release",
                 "ANT_WERROR": "OFF",
-                "ANT_LTO": "OFF",
-                "ANT_DIST": "OFF"
+                "ANT_LOGGING": "OFF"
             }
         },
         {
@@ -45,8 +45,8 @@
                 "CMAKE_BUILD_TYPE": "Release",
                 "ANT_DIST": "ON",
                 "ANT_LTO": "ON",
-                "ANT_WERROR": "OFF",
-                "ANT_SANITIZE": "OFF"
+                "ANT_SANITIZE": "OFF",
+                "ANT_LOGGING": "OFF"
             }
         },
         {
@@ -56,8 +56,7 @@
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "Debug",
                 "ANT_SANITIZE": "address,undefined",
-                "ANT_LTO": "OFF",
-                "ANT_DIST": "OFF"
+                "ANT_LOGGING": "OFF"
             }
         },
         {
@@ -65,7 +64,8 @@
             "inherits": "linux-clang-debug",
             "displayName": "Linux Clang RelWithDebInfo",
             "cacheVariables": {
-                "CMAKE_BUILD_TYPE": "RelWithDebInfo"
+                "CMAKE_BUILD_TYPE": "RelWithDebInfo",
+                "ANT_LOGGING": "ON"
             }
         },
         {
@@ -79,7 +79,8 @@
                 "ANT_WERROR": "OFF",
                 "ANT_SANITIZE": "OFF",
                 "ANT_LTO": "OFF",
-                "ANT_DIST": "OFF"
+                "ANT_DIST": "OFF",
+                "ANT_LOGGING": "ON"
             }
         },
         {
@@ -87,7 +88,8 @@
             "inherits": "windows-msvc-debug",
             "displayName": "Windows MSVC Release",
             "cacheVariables": {
-                "CMAKE_BUILD_TYPE": "Release"
+                "CMAKE_BUILD_TYPE": "Release",
+                "ANT_LOGGING": "OFF"
             }
         }
     ],

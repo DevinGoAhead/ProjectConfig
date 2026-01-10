@@ -1,8 +1,8 @@
-#include "project/"
-#include <iostream>
+#include "project/Test.h"
+#include <print>
 
 namespace Proj{
-    [[maybe_unused]] void Print(){
-        //std::cout << "Hello Project\n";
+   void Print(){
+        std::println({}, "This is a project project");
     }
 }

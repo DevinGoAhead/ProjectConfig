@@ -4,7 +4,7 @@ CompileFlags:
   - -Wno-c++98-compat-pedantic
   - -Wno-padded
   - -Wno-switch-default
-
+  CompilationDatabase: ./
 Diagnostics:
   ClangTidy:
     Add:
@@ -16,6 +16,7 @@ Diagnostics:
     - modernize-use-trailing-return-type
     - readability-magic-numbers
     - readability-identifier-length
+    - readability-redundant-access-specifiers
     - readability-convert-member-functions-to-static
 
 InlayHints:

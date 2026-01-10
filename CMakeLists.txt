@@ -66,6 +66,13 @@ function(ant_apply_options target_name)
       message(WARNING "IPO/LTO not supported: ${_ipo_msg}")
     endif()
   endif()
+  
+   # 是否启用日志打印
+  if(ANT_LOGGING)
+    target_compile_definitions(${target_name} PRIVATE ANT_ENABLE_LOG=1)
+  else()
+    target_compile_definitions(${target_name} PRIVATE ANT_ENABLE_LOG=0)
+  endif()
 endfunction()
 
 # ========================

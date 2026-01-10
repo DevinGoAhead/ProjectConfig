@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../PlatformDetection.h"
+#include "project/core/Core.h"
 
 namespace PT {
-    PROJECT_API void Print();
+    PROJ_API void Print();
 };

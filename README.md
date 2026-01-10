@@ -39,10 +39,12 @@
 ```
 这里不再贴 CMakePresets.json 的源码
 ```
-### CMakeLists.txt 中对应的配置
+### CMakeLists.txt 中与 CMakePreset.json 中对应的配置
 ```cmake
 # option(<variable> "<help_text>" [value])
 # option 会创建一个 boolean 变量, value 默认值为 OFF
+# # CMakePrests.json 中
+# # "cacheVariables": { "ANT_WARNINGS": "ON"} 相当于重新给变量赋值
 option(ANT_WARNINGS "Enable common compiler warnings" ON)
 option(ANT_WERROR "Treat warnings as errors" OFF)
 
@@ -105,4 +107,9 @@ function(ant_apply_options target_name)
   endif()
 endfunction()
 
+```
+# .clangd
+```yaml
+# 这是 compile_command.json 所在的目录, 如果出现找不到头文件的情况, 可能需要调整这里
+CompilationDatabase: build/debug
 ```

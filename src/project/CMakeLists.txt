@@ -10,6 +10,16 @@ target_include_directories(Project
         ${PROJECT_SOURCE_DIR}/vender/glad/include 
 ) 
 
+target_precompile_headers(Project 
+    PRIVATE
+         "$<$<COMPILE_LANGUAGE:CXX>:${PROJECT_SOURCE_DIR}/include/project/core/ProjectPCH.hpp>" # 公共的预编译头
+         #"$<$<COMPILE_LANGUAGE:CXX>:${CMAKE_CURRENT_SOURCE_DIR}/include/ant_pch.hpp>" # Target 独有的预编译头
+)
+
+# target 也可以有自己的单独的预编译头文件
+# target_precompile_headers(Project PRIVATE "$<$<COMPILE_LANGUAGE:CXX>:${CMAKE_CURRENT_SOURCE_DIR}/include/ant_pch.hpp>")
+
+
 # 通常情况下 link 都应该是 PRIVATE
 # 因为实现一般都是在 cpp 文件中的, 不会暴露给头文件
 target_link_libraries(Project 
@@ -35,7 +45,3 @@ target_compile_definitions(Project
 #         PROJECT_STATIC
 # )
 # ant_apply_options(Project)
-
-message(STATUS "PROJECT_SOURCE_DIR = ${PROJECT_SOURCE_DIR}")
-message(STATUS "CMAKE_SOURCE_DIR   = ${CMAKE_SOURCE_DIR}")
-message(STATUS "CMAKE_CURRENT_LIST_DIR = ${CMAKE_CURRENT_LIST_DIR}")
