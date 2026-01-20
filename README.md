@@ -1,3 +1,11 @@
+# CMakeLists.txt
+```cmake
+# 当前 target 为 A 
+# target B link 到 A
+PUBLIC # B 在编译“自己的 cpp”时, 会传递给 B
+PRIVATE # 仅 A 生效
+INTERFACE # 当A 为header_only 时用, 针对 B 生效, 对 A 无效
+```
 # CMakePresets.json
 ```json
 # ${hostSystemName} - CMake 工作的那台机器的操作系统名, 如 Windows, Linux
@@ -7,7 +15,8 @@
 # # build/Linux/linux-release
 "binaryDir": "${sourceDir}/build/${hostSystemName}/${presetName}"
 
-# 这只在win 下需要, 目的是指定 find_packag 的工作目录
+# 通常只在 win 下需要, 目的是指定 find_packag 的工作目录
+# 之后把这个配置删掉了, 我直接放到了vender 下
 "CMAKE_PREFIX_PATH": "D:/.local"
 ```
 ## 警告配置
@@ -42,6 +51,7 @@
 ### CMakeLists.txt 中与 CMakePreset.json 中对应的配置
 ```cmake
 # option(<variable> "<help_text>" [value])
+# 如果 cache 中没有这个变量, 则创建一个并设置默认值, 反之则什么也不做
 # option 会创建一个 boolean 变量, value 默认值为 OFF
 # # CMakePrests.json 中
 # # "cacheVariables": { "ANT_WARNINGS": "ON"} 相当于重新给变量赋值
@@ -111,5 +121,19 @@ endfunction()
 # .clangd
 ```yaml
 # 这是 compile_command.json 所在的目录, 如果出现找不到头文件的情况, 可能需要调整这里
-CompilationDatabase: build/debug
+CompilationDatabase: ./
+```
+
+# compile_commands.json
+*将目标 compile_commands.json "拷贝" 一份*
+```bash
+# linux 
+# linux-clang-debug -- preset name
+python3 SyCC.py --preset linux-clang-debug
+```
+
+```powershell
+# pwsh
+# windows-msvc-debug -- preset name
+python SyCC.py --preset windows-msvc-debug
 ```

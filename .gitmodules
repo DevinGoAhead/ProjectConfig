@@ -1,0 +1,3 @@
+[submodule "vender/spdlog"]
+	path = vender/spdlog
+	url = https://github.com/DevinGoAhead/spdlog.git

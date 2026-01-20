@@ -1,8 +1,8 @@
 #pragma once
 
-#include "PlatformDetection.h"
+#include "PlatformDetection.h" // IWYU pragma: keep
 
-#ifdef PROJ_PLATFORM_WINDOWS
+#ifdef ANT_PLATFORM_WINDOWS
 	#ifndef NOMINMAX
 		// See github.com/skypjack/entt/wiki/Frequently-Asked-Questions#warning-c4003-the-min-the-max-and-the-macro
 		#define NOMINMAX
@@ -23,8 +23,9 @@
 #include <unordered_map>		// IWYU pragma: keep
 #include <unordered_set>		// IWYU pragma: keep
 
+#include <cstdint> 		// IWYU pragma: keep
 
 
-#ifdef PROJ_PLATFORM_WINDOWS
+#ifdef ANT_PLATFORM_WINDOWS
 	#include <Windows.h>
 #endif

@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.26)
-project(ProjectName VERSION 1.0.0 LANGUAGES C CXX)
+project(AntEngine VERSION 1.0.0 LANGUAGES C CXX)
 
 # 这会影响整个目录树，第三方/子项目有时不希望被你强制成 C++23
 # 所以 target 级别如不需要 c++ 23 则需要单独覆盖配置
@@ -66,12 +66,12 @@ function(ant_apply_options target_name)
       message(WARNING "IPO/LTO not supported: ${_ipo_msg}")
     endif()
   endif()
-  
+endfunction()
+
+function(ant_add_definitions target_name)
    # 是否启用日志打印
   if(ANT_LOGGING)
-    target_compile_definitions(${target_name} PRIVATE ANT_ENABLE_LOG=1)
-  else()
-    target_compile_definitions(${target_name} PRIVATE ANT_ENABLE_LOG=0)
+    target_compile_definitions(${target_name} PUBLIC ANT_ENABLE_LOG)
   endif()
 endfunction()
 
@@ -79,12 +79,16 @@ endfunction()
 #   Dependencies
 # ========================
 
-find_package(spdlog CONFIG REQUIRED)
+# find_package(spdlog CONFIG REQUIRED)
+
+add_subdirectory(src/ant)
+add_subdirectory(src/sandbox)
+add_subdirectory(vender/spdlog)
 
 # 对于全局要用的库, 创建一个全局依赖接口集合, 子模块直接 link ProjectDeps 即可
 # 其它 依赖库可以在 spdlog::spdlog 之后补充
-add_library(ProjectDeps INTERFACE) 
-target_link_libraries(ProjectDeps INTERFACE spdlog::spdlog)
-
-add_subdirectory(src/project)
-add_subdirectory(src/sandbox)
+add_library(AntDeps INTERFACE)
+target_link_libraries(AntDeps
+  INTERFACE
+    spdlog::spdlog
+)

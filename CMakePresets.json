@@ -74,6 +74,9 @@
             "displayName": "Windows MSVC Debug",
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "Debug",
+                "CMAKE_C_COMPILER": "clang-cl",
+                "CMAKE_CXX_COMPILER": "clang-cl",
+                "CMAKE_LINKER": "lld-link",
                 "CMAKE_PREFIX_PATH": "D:/.local",
                 "ANT_WARNINGS": "ON",
                 "ANT_WERROR": "OFF",

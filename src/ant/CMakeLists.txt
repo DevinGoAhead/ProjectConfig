@@ -1,6 +1,6 @@
-add_library(Project SHARED Test.cpp)
+add_library(Ant SHARED Test.cpp)
 
-target_include_directories(Project
+target_include_directories(Ant
     PUBLIC 
         ${PROJECT_SOURCE_DIR}/include # 项目级 include 一定需要被传递, 一定是 PUBLIC
     PRIVATE
@@ -10,27 +10,24 @@ target_include_directories(Project
         ${PROJECT_SOURCE_DIR}/vender/glad/include 
 ) 
 
-target_precompile_headers(Project 
+target_precompile_headers(Ant 
     PRIVATE
-         "$<$<COMPILE_LANGUAGE:CXX>:${PROJECT_SOURCE_DIR}/include/project/core/ProjectPCH.hpp>" # 公共的预编译头
+         "$<$<COMPILE_LANGUAGE:CXX>:${PROJECT_SOURCE_DIR}/include/ant/core/AntPCH.hpp>" # 公共的预编译头
          #"$<$<COMPILE_LANGUAGE:CXX>:${CMAKE_CURRENT_SOURCE_DIR}/include/ant_pch.hpp>" # Target 独有的预编译头
 )
-
-# target 也可以有自己的单独的预编译头文件
-# target_precompile_headers(Project PRIVATE "$<$<COMPILE_LANGUAGE:CXX>:${CMAKE_CURRENT_SOURCE_DIR}/include/ant_pch.hpp>")
 
 
 # 通常情况下 link 都应该是 PRIVATE
 # 因为实现一般都是在 cpp 文件中的, 不会暴露给头文件
-target_link_libraries(Project 
+target_link_libraries(Ant 
     PUBLIC 
-        ProjectDeps)
+        AntDeps)
 
-target_compile_definitions(Project
+target_compile_definitions(Ant
     # 编译时添加的宏
     # PRIVATE 表示不传递
     PRIVATE
-        PROJECT_BUILD
+        ANT_BUILD
     PUBLIC
         # generator expression, "生成构建系统/构建阶段”按条件展开
         # 当配置是 Debug 时, $<CONFIG:Debug> 为 1, 条件为真, ANT_DEBUG 有效
@@ -40,8 +37,10 @@ target_compile_definitions(Project
 )
 
 # 就 PROJECT_BUILD 而言, 如果是静态库可以添加其它宏, 如
-# target_compile_definitions(Project 
+# target_compile_definitionsAnt 
 #     PUBLIC 
-#         PROJECT_STATIC
+#         ANT_STATIC
 # )
-# ant_apply_options(Project)
+
+ant_apply_options(Ant)
+ant_add_definitions(Ant)
