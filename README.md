@@ -8,15 +8,15 @@ INTERFACE # 当A 为header_only 时用, 针对 B 生效, 对 A 无效
 ```
 # CMakePresets.json
 ```json
-# ${hostSystemName} - CMake 工作的那台机器的操作系统名, 如 Windows, Linux
-# ${presetName} - "name": "linux-debug",
-# 最终效果:
-# # build/Linux/linux-debug
-# # build/Linux/linux-release
+// ${hostSystemName} - CMake 工作的那台机器的操作系统名, 如 Windows, Linux
+// ${presetName} - "name": "linux-debug",
+// 最终效果:
+// build/Linux/linux-debug
+// build/Linux/linux-release
 "binaryDir": "${sourceDir}/build/${hostSystemName}/${presetName}"
 
-# 通常只在 win 下需要, 目的是指定 find_packag 的工作目录
-# 之后把这个配置删掉了, 我直接放到了vender 下
+// 通常只在 win 下需要, 目的是指定 find_packag 的工作目录
+// 之后把这个配置删掉了, 我直接放到了vender 下
 "CMAKE_PREFIX_PATH": "D:/.local"
 ```
 ## 警告配置
@@ -117,6 +117,33 @@ function(ant_apply_options target_name)
   endif()
 endfunction()
 
+```
+## 编译器/构建器配置
+```json
+// 这里主要是为了控制 CMake 的GUI 中是否显示该配置, 等价于
+// if(${hostSystemName} == "Windows) 才显示该配置
+"condition": {
+    "type": "equals",
+    "lhs": "${hostSystemName}",
+    "rhs": "Windows"
+}
+
+// 如果用的是 Visual Studio 生成器，CMake 可以直接传参数告诉 VS 怎么做
+
+// 但我这里用的是 Ninja
+// Ninja 无法知道什么是 x64 环境
+// 设置成 external 后，VS Code（CMake Tools 插件）会在后台运行 vcvarsall.bat x64，把环境变量配好，然后再启动 CMake
+"architecture": {
+    "value": "x64",
+    "strategy": "external"
+}
+
+// value: "host=x64"：
+// 这指的是编译器程序 (cl.exe) 本身是 32位还是 64位
+"toolset": {
+    "value": "host=x64",
+    "strategy": "external"
+}
 ```
 # .clangd
 ```yaml

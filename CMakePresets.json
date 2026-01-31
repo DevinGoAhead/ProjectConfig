@@ -7,24 +7,29 @@
             "generator": "Ninja",
             "binaryDir": "${sourceDir}/build/${hostSystemName}/${presetName}",
             "cacheVariables": {
-                "CMAKE_EXPORT_COMPILE_COMMANDS": "ON"
+                "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
+                "ANT_LOGGING": "ON",
+                "ANT_ASSERTING": "ON"
             }
         },
         {
             "name": "linux-clang-debug",
             "inherits": "base",
             "displayName": "Linux Clang Debug",
+                        "condition": {
+                "type": "equals",
+                "lhs": "${hostSystemName}",
+                "rhs": "Linux"
+            },
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "Debug",
                 "CMAKE_C_COMPILER": "clang",
                 "CMAKE_CXX_COMPILER": "clang++",
-                "CMAKE_PREFIX_PATH": "$env{HOME}/.local",
                 "ANT_WARNINGS": "ON",
                 "ANT_WERROR": "OFF",
                 "ANT_SANITIZE": "OFF",
                 "ANT_LTO": "OFF",
-                "ANT_DIST": "OFF",
-                "ANT_LOGGING": "ON"
+                "ANT_DIST": "OFF"
             }
         },
         {
@@ -34,7 +39,8 @@
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "Release",
                 "ANT_WERROR": "OFF",
-                "ANT_LOGGING": "OFF"
+                "ANT_LOGGING": "OFF",
+                "ANT_ASSERTING": "OFF"
             }
         },
         {
@@ -46,7 +52,8 @@
                 "ANT_DIST": "ON",
                 "ANT_LTO": "ON",
                 "ANT_SANITIZE": "OFF",
-                "ANT_LOGGING": "OFF"
+                "ANT_LOGGING": "OFF",
+                "ANT_ASSERTING": "OFF"
             }
         },
         {
@@ -56,7 +63,8 @@
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "Debug",
                 "ANT_SANITIZE": "address,undefined",
-                "ANT_LOGGING": "OFF"
+                "ANT_LOGGING": "OFF",
+                "ANT_ASSERTING": "OFF"
             }
         },
         {
@@ -65,25 +73,37 @@
             "displayName": "Linux Clang RelWithDebInfo",
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "RelWithDebInfo",
-                "ANT_LOGGING": "ON"
+                "ANT_LOGGING": "ON",
+                "ANT_ASSERTING": "OFF"
             }
         },
         {
             "name": "windows-msvc-debug",
             "inherits": "base",
             "displayName": "Windows MSVC Debug",
+            "description": "Target Windows x64 using MSVC Compiler",
+                        "condition": {
+                "type": "equals",
+                "lhs": "${hostSystemName}",
+                "rhs": "Windows"
+            },
+            "architecture": {
+                "value": "x64"
+            },
+            "toolset": {
+                "value": "host=x64"
+            },
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "Debug",
-                "CMAKE_C_COMPILER": "clang-cl",
-                "CMAKE_CXX_COMPILER": "clang-cl",
-                "CMAKE_LINKER": "lld-link",
-                "CMAKE_PREFIX_PATH": "D:/.local",
+                "CMAKE_C_COMPILER": "cl",
+                "CMAKE_CXX_COMPILER": "cl",
                 "ANT_WARNINGS": "ON",
                 "ANT_WERROR": "OFF",
                 "ANT_SANITIZE": "OFF",
                 "ANT_LTO": "OFF",
                 "ANT_DIST": "OFF",
-                "ANT_LOGGING": "ON"
+                "ANT_LOGGING": "ON",
+                "ANT_ASSERTING": "ON"
             }
         },
         {
@@ -92,7 +112,8 @@
             "displayName": "Windows MSVC Release",
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "Release",
-                "ANT_LOGGING": "OFF"
+                "ANT_LOGGING": "OFF",
+                "ANT_ASSERTING": "OFF"
             }
         }
     ],

@@ -176,9 +176,11 @@ def main():
         # Windows: symlink -> hardlink -> copy
         # POSIX: symlink -> copy (hardlink is okay too, but symlink is nicer)
         if is_windows:
-            ok = (attempt("symlink", lambda: try_symlink(src_cc, dst_cc)) or
-                  attempt("hardlink", lambda: try_hardlink(src_cc, dst_cc)) or
-                  attempt("copy", lambda: try_copy(src_cc, dst_cc)))
+            if is_windows:
+                ok = (attempt("copy", lambda: try_copy(src_cc, dst_cc)) or
+                        attempt("hardlink", lambda: try_hardlink(src_cc, dst_cc)) or
+                        attempt("symlink", lambda: try_symlink(src_cc, dst_cc)))
+
         else:
             ok = (attempt("symlink", lambda: try_symlink(src_cc, dst_cc)) or
                   attempt("copy", lambda: try_copy(src_cc, dst_cc)))
